@@ -1,9 +1,5 @@
 module.exports = {
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking'
-  ],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:@typescript-eslint/recommended-requiring-type-checking', 'plugin:storybook/recommended'],
   plugins: ['@typescript-eslint'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -14,11 +10,15 @@ module.exports = {
     semi: ['error', 'always'],
     quotes: ['error', 'single'],
     indent: ['error', 2],
-    'no-trailing-spaces': ['error', { skipBlankLines: false }],
+    'no-trailing-spaces': ['error', {
+      skipBlankLines: false
+    }],
     'object-curly-spacing': ['error', 'always'],
     'space-before-function-paren': ['error', 'never'],
-    'keyword-spacing': ['error', { before: true }],
+    'keyword-spacing': ['error', {
+      before: true
+    }],
     'space-before-blocks': 2
   },
   root: true
-}
+};

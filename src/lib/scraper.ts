@@ -11,6 +11,7 @@ export async function getPage(link: string) {
     }
   } catch (error) {
     console.error(`Error fetching ${link}:`, error);
+    throw new Error(`Error fetching ${link}`);
   }
 }
 
