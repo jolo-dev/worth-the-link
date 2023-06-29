@@ -12,13 +12,7 @@ module.exports = {
     indent: ['error', 2],
     'no-trailing-spaces': ['error', {
       skipBlankLines: false
-    }],
-    'object-curly-spacing': ['error', 'always'],
-    'space-before-function-paren': ['error', 'never'],
-    'keyword-spacing': ['error', {
-      before: true
-    }],
-    'space-before-blocks': 2
+    }]
   },
   root: true
 };

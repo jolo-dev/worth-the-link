@@ -1,16 +1,21 @@
 <script>
   import Loader from './Loader.svelte'
   import { getPageContent } from './scraper'
+  import { useCompletion } from 'ai/svelte';
 
   export let link = ''
   let promise = getPageContent(link)
+  const { completion } = useCompletion({
+    // api: '/api/completion',
+    api: 'https://api.openai.com/v1/engines/davinci/completions',
+  });
+  
 </script>
 
-<div class="tooltip" data-url={link}>
+<div class="tooltip" data-url={link} style="position: absolute; background:black;color: white;">
   {#await promise}
     <Loader />
   {:then content}
-    Content
     {content}
   {:catch error}
     Error
