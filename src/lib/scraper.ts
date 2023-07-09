@@ -1,5 +1,4 @@
 import * as cheerio from 'cheerio';
-import { getSummary } from './openAi';
 
 export async function getPage( link: string ) {
   console.log( 'Start scraping and fetching', link );
@@ -9,17 +8,19 @@ export async function getPage( link: string ) {
       headers: {
         'Access-Control-Allow-Origin': '*'
       },
-      mode: 'no-cors'
+      mode: 'no-cors',
     } );
     if ( response.ok ) {
       const html = await response.text();
+      console.log( 'Fetched', html );
+
       return html;
     } else {
       throw new Error( `Error fetching ${link}: ${response.status}` );
     }
   } catch ( error ) {
-    console.error( `Error fetching ${link}:`, error );
-    throw new Error( `Error fetching ${link}` );
+    console.error( error );
+    throw new Error( error );
   }
 }
 
@@ -34,5 +35,5 @@ export function parseHtml( html: string ): string {
 export async function getPageContent( link: string ) {
   const html = await getPage( link );
   const content = html ? parseHtml( html ) : '';
-  return await getSummary( content );
+  return content;
 }

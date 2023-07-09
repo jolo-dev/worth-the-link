@@ -5,12 +5,17 @@
   import createTooltipAction from './lib/tooltip.actions'
   
   onMount(() => {
-    const links = document.querySelectorAll('a')
-    if (links) {
-      links.forEach((link) => {
-        createTooltipAction(link)        
-      })
-    }
+    setTimeout(() => {
+      console.log('Mounting Worth-the-link extension');
+      
+      const links = document.querySelectorAll('a')
+      
+      if (links) {
+        links.forEach((link) => {
+          createTooltipAction(link)        
+        })
+      }
+    }, 5000);
   })
 
 </script>

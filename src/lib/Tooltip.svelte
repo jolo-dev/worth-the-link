@@ -1,28 +1,30 @@
 <script>
+  import { onMount } from 'svelte'
   import Loader from './Loader.svelte'
   import { getPageContent } from './scraper'
   import { useCompletion } from 'ai/svelte';
 
-  export let link = ''
-  let promise = getPageContent(link)
-  const { completion } = useCompletion({
-    // api: '/api/completion',
-    api: 'https://api.openai.com/v1/engines/davinci/completions',
-  });
-  
+export let link = ''
+let promise
+onMount(async () => {
+  try {
+    promise = getPageContent(link)
+  } catch (error) {
+    console.error(error);
+  }
+})
+
 </script>
 
-<div class="tooltip" data-url={link} style="position: absolute; background:black;color: white;">
-  {#await promise}
-    <Loader />
-  {:then content}
+{#await promise}
+  <p>...waiting</p>
+{:then content} 
+  <div class="tooltip" data-url={link} contenteditable="inherit" style="position: absolute; background:black;color: white;">
     {content}
-  {:catch error}
-    Error
-    <p style="color: red">{error.message}</p>
-  {/await}
-  <div id="arrow" />
-</div>
+    <div id="arrow" />
+  </div>
+{/await}
+
 
 <style>
   .tooltip {

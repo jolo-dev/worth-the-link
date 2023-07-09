@@ -1,5 +1,5 @@
-import { Configuration, OpenAIApi } from 'openai';
-// import { OpenAIStream, StreamingTextResponse } from 'ai';
+import { Configuration, OpenAIApi } from 'openai-edge';
+import { OpenAIStream, StreamingTextResponse } from 'ai';
 import { encode } from '@nem035/gpt-3-encoder';
 
 const openai = connectToOpenAi();
@@ -33,14 +33,14 @@ export async function getSummary( text: string ) {
       // Need to Calculate the tokens
       // https://github.com/openai/openai-node/issues/52#issuecomment-1404840559
       max_tokens: 4090 - tokens,
-      // stream: true,
+      stream: true,
     } );
 
     // Convert the response into a friendly text-stream
-    // const stream = OpenAIStream( completion );
+    const stream = OpenAIStream( completion );
     // Respond with the stream
-    // return new StreamingTextResponse( stream );
-    return completion.data.choices[0].text;
+    return new StreamingTextResponse( stream );
+    // return completion.data.choices[0].text;
   } catch ( error ) {
     console.error( error );
     return '<b>Probably, too big to fetch </b>';

@@ -22,7 +22,7 @@ export default function createTooltipAction( link: HTMLAnchorElement ) {
     if ( tooltip ) {
       console.log( 'onMouseMove' );
       tooltip.style.display = 'inline-block';
-      tooltip.style.top = `${event.pageY - 225}px`;
+      tooltip.style.top = `${event.pageY - 25}px`;
       tooltip.style.left = `${event.pageX - 10}px`;
     }
   }
